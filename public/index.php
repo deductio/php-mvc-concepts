@@ -3,8 +3,15 @@
 /**
  * Front controller
  *
- * PHP version 5.6
+ * PHP version 5.4
  */
+
+/**
+ * Twig
+ */
+require_once dirname(__DIR__) . '/vendor/Twig/lib/Twig/Autoloader.php';
+Twig_Autoloader::register();
+
 
 /**
  * Autoloader

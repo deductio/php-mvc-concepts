@@ -5,7 +5,7 @@ namespace App\Controllers;
 /**
  * Posts controller
  *
- * PHP version 5.6
+ * PHP version 5.4
  */
 class Posts extends \Core\Controller
 {
