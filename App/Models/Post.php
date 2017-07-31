@@ -9,7 +9,7 @@ use PDO;
  *
  * PHP version 5.4
  */
-class Post
+class Post extends \Core\Model
 {
 
     /**
@@ -18,17 +18,12 @@ class Post
      * @return array
      */
     public static function getAll()
-    {
-        $host = 'localhost';
-        $dbname = 'mvc';
-        $username = 'root';
-        $password = 'mysql';
-    
+    {    
         try {
-            $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8",
-                          $username, $password);
 
-            $stmt = $db->query('SELECT id, title, content FROM posts
+            $db = static::getDB();
+
+            $stmt = $db->query('SELECT id, title, content FROM posts 
                                 ORDER BY created_at');
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
