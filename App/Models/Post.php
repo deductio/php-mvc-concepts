@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use \App\Controllers\Posts;
 
 /**
  * Post model
@@ -26,6 +27,24 @@ class Post extends \Core\Model
 
             return $results;
             
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function addPost($title, $content)
+    {
+        try {
+            $db = static::getDB();
+
+            $stmt = $db->prepare("INSERT INTO posts (title, content) VALUES (:title, :content)");
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':content', $content);
+            $stmt->execute();
+
+            //header('location: '.$_SERVER['REQUEST_URI']);
+            Posts::staticIndex();
+
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

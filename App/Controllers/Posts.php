@@ -27,14 +27,28 @@ class Posts extends \Core\Controller
         ]);
     }
 
+    public static function staticIndex()
+    {
+        $posts = Post::getAll();
+
+        View::renderTemplate('Posts/index.html', [
+            'posts' => $posts
+        ]);
+    }
+
     /**
-     * Show the add new page
+     * Show the add new post
      *
      * @return void
      */
     public function addNewAction()
     {
-        echo 'Hello from the addNew action in the Posts controller!';
+        if(!empty($_POST['title']) && !empty($_POST['content'])) {
+            $post = new Post();
+            $post->addPost($_POST['title'], $_POST['content']);
+        } else {
+            View::renderTemplate('Posts/add.html');
+        }
     }
     
     /**
