@@ -27,15 +27,6 @@ class Posts extends \Core\Controller
         ]);
     }
 
-    public static function staticIndex()
-    {
-        $posts = Post::getAll();
-
-        View::renderTemplate('Posts/index.html', [
-            'posts' => $posts
-        ]);
-    }
-
     /**
      * Show the add new post
      *
@@ -46,6 +37,11 @@ class Posts extends \Core\Controller
         if(!empty($_POST['title']) && !empty($_POST['content'])) {
             $post = new Post();
             $post->addPost($_POST['title'], $_POST['content']);
+
+            // Redirect to the posts index page
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/posts/index', true, 303);
+            exit;
+
         } else {
             View::renderTemplate('Posts/add.html');
         }
